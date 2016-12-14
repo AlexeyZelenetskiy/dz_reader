@@ -20,7 +20,7 @@ void Dialog::on_pushButton_clicked()
 {
      if(ui->lineEdit->text() == "")
      {
-         QMessageBox::information(this, "Erore!" , "you do not specify the path");
+         QMessageBox::information(this, "Erore!" , "you do not specify the path");  // Erore :D
          return;
      }
      else
