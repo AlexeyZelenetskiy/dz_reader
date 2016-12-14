@@ -44,7 +44,7 @@ public:
     QString body__();
 private:
     QString _xml;
-    void pars(QString & xml, Node & node);
+    void pars(QString  xml, Node & node);
     Node firstElement(const QString & xml);
     QString crop(QString & xml, Node & item);
 };

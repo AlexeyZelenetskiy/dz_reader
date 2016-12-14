@@ -77,7 +77,7 @@ QString tree::crop(QString & xml, Node & item)
 }
 
 
-void tree::pars(QString & xml, Node & node)
+void tree::pars(QString xml, Node & node)
 {
     while(xml != "")
     {
