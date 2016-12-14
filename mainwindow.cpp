@@ -72,12 +72,12 @@ void MainWindow::getPath(QString path)
         }
 
         ui->textBrowser->setHtml(vec[0]);
-        QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+        QString lbl = QString::number((k+1)) + '/' + QString::number(vec.size());
         ui->label->setText(lbl);
         file.close();
     }
     catch(const std::exception & ex){
-        qDebug() << QString(ex.what());
+        qDebug() << QString(ex.what()); //  мб QMessageBox с error все же
     }
 }
 
@@ -85,7 +85,7 @@ void MainWindow::on_pushButton_clicked()
 {
     if(k != vec.size() - 1)
       ui->textBrowser->setHtml(vec[++k]);
-   QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+   QString lbl = QString::number((k+1)) + '/' + QString::number(vec.size());
     ui->label->setText(lbl);
 }
 
@@ -95,6 +95,6 @@ void MainWindow::on_pushButton_2_clicked()
 {
     if(k != 0)
       ui->textBrowser->setHtml(vec[--k]);
-    QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+    QString lbl = QString::number((k+1)) + '/' + QString::number(vec.size());
     ui->label->setText(lbl);
 }
