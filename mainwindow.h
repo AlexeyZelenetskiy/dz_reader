@@ -24,7 +24,6 @@ private:
     int k;
 
 private slots:
-   void getPath(QString);
    void openClicked();
    void on_pushButton_clicked();
    void on_pushButton_2_clicked();

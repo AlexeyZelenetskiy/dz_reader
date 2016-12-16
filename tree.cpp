@@ -81,7 +81,7 @@ void tree::pars(QString xml, Node & node)
 {
     while(xml != "")
     {
-        shared_ptr<Node> item (new Node(firstElement(xml)));
+        shared_ptr<Node> item (new Node(firstElement(xml).name, "", firstElement(xml).attribute));
         QString str = crop(xml, *item);
 
         if(str != "")

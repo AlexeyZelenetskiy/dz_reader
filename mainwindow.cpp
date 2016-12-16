@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QFile>
 #include <QDebug>
+#include <QMessageBox>
+#include <QFileDialog>
 
 using namespace std;
 
@@ -21,19 +23,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::openClicked()
 {
-    Dialog *dlg = new Dialog(this);
-    dlg->show();
+    QFileDialog dlg;
 
-    connect(dlg, SIGNAL(pathSelected(QString)), SLOT(getPath(QString)));
-
-}
-
-void MainWindow::getPath(QString path)
-{
     try{
-        QFile file(path);
+        QFile file(dlg.getOpenFileName());
         if(!file.open(QIODevice::ReadOnly))
+        {
+            QMessageBox::information(this, "erore", "file is not correct");
             return;
+        }
 
         QString xml = QString::fromUtf8(file.readAll());
 
@@ -72,29 +70,43 @@ void MainWindow::getPath(QString path)
         }
 
         ui->textBrowser->setHtml(vec[0]);
-        QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+        QString lbl = QString::number((k+1)) + '/' + QString::number(vec.size());
         ui->label->setText(lbl);
         file.close();
     }
     catch(const std::exception & ex){
-        qDebug() << QString(ex.what());
+        QMessageBox::information(this, "error", QString(ex.what()));
     }
-}
 
+}
 void MainWindow::on_pushButton_clicked()
 {
-    if(k != vec.size() - 1)
+   if(vec.size() != 0)
+   {
+     if(k != vec.size() - 1)
       ui->textBrowser->setHtml(vec[++k]);
-   QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
-    ui->label->setText(lbl);
+     QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+     ui->label->setText(lbl);
+   }
+   else
+   {
+     QMessageBox::information(this, "error", "book is not open");
+   }
 }
 
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(k != 0)
+    if(vec.size() != 0)
+   {
+     if(k != 0)
       ui->textBrowser->setHtml(vec[--k]);
-    QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
-    ui->label->setText(lbl);
+     QString lbl = QString::number((k+1)) + '/' + QString::number((vec.size() + 1));
+     ui->label->setText(lbl);
+   }
+   else
+   {
+      QMessageBox::information(this, "error", "book is not open");
+   }
 }
