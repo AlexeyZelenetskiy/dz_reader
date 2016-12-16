@@ -1,3 +1,4 @@
+//class is not use
 #ifndef DIALOG_H
 #define DIALOG_H
 

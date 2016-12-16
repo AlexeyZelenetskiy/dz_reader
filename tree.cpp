@@ -141,11 +141,11 @@ shared_ptr<tree::Node> tree::getById(QString _name, shared_ptr<Node> _root)
 
     if(_root->son)
         if(getById(_name, _root->son))
-         return getById(_name, _root->son );
+         return getById(_name, _root->son ); // два раза подряд поиск
 
     if(_root->brother)
         if(getById(_name, _root->brother))
-        return getById(_name, _root->brother);
+        return getById(_name, _root->brother); // два раза подряд поиск
 
     return shared_ptr<Node>(nullptr);
 }
