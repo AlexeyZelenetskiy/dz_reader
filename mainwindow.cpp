@@ -26,10 +26,10 @@ void MainWindow::openClicked()
     QFileDialog dlg;
 
     try{
-        QFile file(dlg.getOpenFileName());
+        QFile file(dlg.getOpenFileName(this, "Open Dialog", "", "*.fb2"));
         if(!file.open(QIODevice::ReadOnly))
         {
-            QMessageBox::information(this, "erore", "file is not correct");
+            QMessageBox::information(this, "error", "file is not correct");
             return;
         }
 
@@ -77,11 +77,10 @@ void MainWindow::openClicked()
     catch(const std::exception & ex){
         QMessageBox::information(this, "error", QString(ex.what()));
     }
-
 }
 void MainWindow::on_pushButton_clicked()
 {
-   if(vec.size() != 0)
+   if(!vec.empty())
    {
      if(k != vec.size() - 1)
       ui->textBrowser->setHtml(vec[++k]);
@@ -98,7 +97,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    if(vec.size() != 0)
+    if(!vec.empty())
    {
      if(k != 0)
       ui->textBrowser->setHtml(vec[--k]);

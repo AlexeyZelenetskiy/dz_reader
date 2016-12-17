@@ -9,6 +9,7 @@
 #include <QString>
 #include <QDebug>
 #include <memory>
+#include <exception>
 
 using namespace std;
 
@@ -34,10 +35,18 @@ class tree
 public:
     tree() {}
     tree(QString & xml)
-        : root(new Node(firstElement(xml).name, "", firstElement(xml).attribute))
     {
+        Node current = firstElement(xml);
+        QString name = current.name;
+        root = shared_ptr<Node>(new Node(name, "", current.attribute));
         _xml = xml;
-        pars(crop(xml, *root), *root);
+        QString str = crop(xml, *root);
+        QString item = _xml.mid(_xml.lastIndexOf('<') + 2, _xml.size() - _xml.lastIndexOf('<') - 3);
+        if(item == name)
+           pars(str, *root);
+        else
+           throw exception("Malformed xml");
+
     }
 
     shared_ptr<Node> getById(QString _name, shared_ptr<Node> _root = shared_ptr<Node>(nullptr));

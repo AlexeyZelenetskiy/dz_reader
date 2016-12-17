@@ -6,6 +6,7 @@
 #include "dialog.h"
 #include <vector>
 
+
 namespace Ui {
 class MainWindow;
 }

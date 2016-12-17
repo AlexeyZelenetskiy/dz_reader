@@ -91,7 +91,6 @@ void tree::pars(QString xml, Node & node)
             else
             {
                item->data += str.mid(0, str.indexOf('<'));
-               //str = str.mid(0, str.indexOf('<'));
                if(str[str.size() - 1] != '>')
               {
                    item->data += str.mid(str.lastIndexOf('>') + 1, str.size() - str.lastIndexOf('>') - 1);
@@ -140,12 +139,12 @@ shared_ptr<tree::Node> tree::getById(QString _name, shared_ptr<Node> _root)
         return _root;
 
     if(_root->son)
-        if(getById(_name, _root->son))
-         return getById(_name, _root->son );
+        if(auto ptr = getById(_name, _root->son))
+         return ptr;
 
     if(_root->brother)
-        if(getById(_name, _root->brother))
-        return getById(_name, _root->brother);
+        if(auto ptr = getById(_name, _root->brother))
+           return ptr;
 
     return shared_ptr<Node>(nullptr);
 }
